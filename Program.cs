@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.ComponentModel;
+using System.Net.Http.Headers;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace LeetCode_MedianOf2SortedArrays
 {
@@ -111,16 +113,119 @@ namespace LeetCode_MedianOf2SortedArrays
 
         public static string StringProduct(string s1, string s2)
         {
-            double num1 = double.Parse(s1);
-            double num2 = double.Parse(s2);
+            //multiply two strings without using biginteger
+            //123456789
+            //987654321
+            //121932631112635269
+
+            string answer = "";
+            int carry = 0;
+            int[] result = new int[s1.Length + s2.Length];
+            for (int i = s1.Length - 1; i >= 0; i--)
+            {
+                for (int j = s2.Length - 1; j >= 0; j--)
+                {
+                    int sum = (s1[i] - '0') * (s2[j] - '0') + carry + result[i + j + 1];
+                    result[i + j + 1] = sum % 10;
+                    carry = sum / 10;
+                }
+                result[i] += carry;
+                carry = 0;
+            }
+            StringBuilder sb = new StringBuilder();
+            foreach (int i in result)
+            {
+                sb.Append(i);
+            }
+            answer = sb.ToString();
+            while (answer[0] == '0' && answer.Length > 1)
+            {
+                answer = answer.Substring(1);
+            }
+            return answer;
+        }
 
 
-            return ((long)(num1 * num2)).ToString();
+        //Longest Substring Without Repeating Characters
+        public static int lengthOfLongestSubstring(String arr)
+        {
+             
+
+            String substring = ""; 
+            List<int> maxlens = new List<int>();
+            maxlens.Add(0);
+            if (!arr.Equals(string.Empty))
+            {
+                for(int r = 0; r < arr.Length; r++)
+                {
+                    for (int i = r; i < arr.Length; i++)
+                    {
+                        if (substring.Contains(arr[i]))
+                        {
+                           
+                             
+                            substring = "";
+                            
+                            break;
+
+                        }
+                        else
+                        {
+
+                            substring += arr[i];
+                            maxlens.Add(substring.Length);
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return 0;
+            }
+
+            return maxlens.Max();
+        }
+
+        public static int MyAtoi(string s)
+        {
+            bool isNegative = false;
+            BigInteger number = 0;
+
+            s = s.Trim();
+            Console.WriteLine(s);
+            if (s.Contains('-')) isNegative = true;
+
+            
+
+            if (isNegative)
+            {
+                if (!Int32.TryParse(s[0].ToString(), out int re)) return 0;
+            }
+            else
+            {
+                if (!Int32.TryParse(s[1].ToString(), out int re)) return 0;
+            }
+
+            for(int i = 0; i < s.Length; i++)
+            {
+                if (Int32.TryParse(s[i].ToString(),out int res) )
+                {
+                    number = (number * 10) + res;
+
+                   
+                }
+            }
+
+            if (number >= Int32.MaxValue) return Int32.MaxValue;
+            else if (number <= Int32.MinValue) return Int32.MinValue; 
+
+            return isNegative ? Convert.ToInt32(number) * (-1) : Convert.ToInt32(number);
         }
         static void Main(string[] args)
         {
-            Console.WriteLine(StringProduct("123456789", "987654321"));
-
+            Console.WriteLine(-91283472332 < Int32.MinValue);
+           Console.WriteLine(MyAtoi("-91283472332"));
         }
     }
 }

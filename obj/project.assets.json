@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mhamz\\source\\repos\\LeetCode_MedianOf2SortedArrays\\LeetCode_problems.csproj",
+      "projectUniqueName": "C:\\Users\\Mhamz\\source\\repos\\LeetCode\\LeetCode_problems.csproj",
       "projectName": "LeetCode_problems",
-      "projectPath": "C:\\Users\\Mhamz\\source\\repos\\LeetCode_MedianOf2SortedArrays\\LeetCode_problems.csproj",
+      "projectPath": "C:\\Users\\Mhamz\\source\\repos\\LeetCode\\LeetCode_problems.csproj",
       "packagesPath": "C:\\Users\\Mhamz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mhamz\\source\\repos\\LeetCode_MedianOf2SortedArrays\\obj\\",
+      "outputPath": "C:\\Users\\Mhamz\\source\\repos\\LeetCode\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
