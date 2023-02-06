@@ -113,10 +113,6 @@ namespace LeetCode_MedianOf2SortedArrays
 
         public static string StringProduct(string s1, string s2)
         {
-            //multiply two strings without using biginteger
-            //123456789
-            //987654321
-            //121932631112635269
 
             string answer = "";
             int carry = 0;
@@ -190,42 +186,79 @@ namespace LeetCode_MedianOf2SortedArrays
         public static int MyAtoi(string s)
         {
             bool isNegative = false;
-            BigInteger number = 0;
+            int number = 0;
 
             s = s.Trim();
             Console.WriteLine(s);
-            if (s.Contains('-')) isNegative = true;
+            if (s.Contains('-'))
+            {
+                isNegative = true;
 
-            
+                s = s.Remove(0, 1);
+            }
 
-            if (isNegative)
+            if (!s.Equals(string.Empty))
             {
                 if (!Int32.TryParse(s[0].ToString(), out int re)) return 0;
             }
             else
             {
-                if (!Int32.TryParse(s[1].ToString(), out int re)) return 0;
+                return 0;
             }
-
-            for(int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
-                if (Int32.TryParse(s[i].ToString(),out int res) )
+                
+                if (!Char.IsDigit(s[i]))
                 {
-                    number = (number * 10) + res;
-
-                   
+                    
+                    if (s[i].Equals('.'))
+                    {
+                        s = s.Remove(i, s.Length - i);
+                        break;
+                    }
+                    else
+                    {
+                        s = s.Remove(i, 1);
+                        i--;
+                    }
                 }
-            }
+                //also remove avery digit after decimal
+               
 
-            if (number >= Int32.MaxValue) return Int32.MaxValue;
-            else if (number <= Int32.MinValue) return Int32.MinValue; 
+            }   
 
-            return isNegative ? Convert.ToInt32(number) * (-1) : Convert.ToInt32(number);
+
+
+            
+                if (Int32.TryParse(s, out int x))
+                {
+
+                    for (int i = 0; i < s.Length; i++)
+                    {
+                        if (Int32.TryParse(s[i].ToString(), out int res))
+                        {
+                            number = (number * 10) + res;
+
+
+                        }
+                    }
+
+                    if (number >= Int32.MaxValue) return Int32.MaxValue;
+                    else if (number <= Int32.MinValue) return Int32.MinValue;
+
+                    return isNegative ? Convert.ToInt32(number) * (-1) : Convert.ToInt32(number);
+                }
+                else
+                {
+                    return isNegative ? Int32.MinValue : Int32.MaxValue;
+                }
+ 
         }
         static void Main(string[] args)
         {
-            Console.WriteLine(-91283472332 < Int32.MinValue);
-           Console.WriteLine(MyAtoi("-91283472332"));
+            double d = 6.225;
+            //Console.WriteLine(Convert.ToDouble()); 
+            Console.WriteLine(MyAtoi(""));
         }
     }
 }
