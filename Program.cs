@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Xml.XPath;
 
 namespace LeetCode_MedianOf2SortedArrays
 {
@@ -196,6 +197,10 @@ namespace LeetCode_MedianOf2SortedArrays
 
                 s = s.Remove(0, 1);
             }
+            else if (s.Contains('+'))
+            {
+                s = s.Remove(0, 1);
+            }
 
             if (!s.Equals(string.Empty))
             {
@@ -254,11 +259,32 @@ namespace LeetCode_MedianOf2SortedArrays
                 }
  
         }
+
+        public static int[] Shuffle(int[] nums, int n)
+        {
+             int[] result = new int[nums.Length];
+
+
+             int count = 0;
+             for(int i =0; i < 2*n; i++)
+             {
+                 if(i%2 == 0)
+                 {
+                     result[i] = nums[count];
+                 }
+                 else
+                 {
+                     result[i] = nums[count + n];
+                     count++;
+                 }
+             }
+
+             return result;
+        }
         static void Main(string[] args)
         {
-            double d = 6.225;
-            //Console.WriteLine(Convert.ToDouble()); 
-            Console.WriteLine(MyAtoi(""));
+            int[] arr = { 2, 5, 1, 3, 4, 7 };
+            Shuffle(arr,3);
         }
     }
 }
