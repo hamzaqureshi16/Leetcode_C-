@@ -423,9 +423,85 @@ namespace LeetCode_MedianOf2SortedArrays
 
             return ans.ToString();
         }
+
+        public static string LongestCommonPrefix(string[] strs)
+        {
+            StringBuilder ans = new StringBuilder();
+            ans.Append(strs[0]);
+            foreach (string str in strs)
+            {
+                if(str.Length < ans.Length)
+                {
+                    ans.Clear();
+                    ans.Append(str);
+                }
+            }
+
+            int goBackFrom = ans.Length ;
+            bool found = false;
+
+            while(goBackFrom > 0 && !found)
+            { 
+                Stack<string> strings = new Stack<string>();
+                foreach (string str in strs)
+                {
+                    strings.Push(str.Substring(0,goBackFrom));
+                }
+
+                found = true;
+
+                foreach(string str in strings)
+                { 
+
+                   Console.WriteLine(str);
+                }
+            }
+
+            return ans.ToString();
+        }
+
+        //max water container
+        public static int MaxArea(int[] height)
+        {
+            int max = 0,left = 0 , right = height.Length-1;
+
+
+            while (left < right)
+            {
+                int area = Math.Min(height[left], height[right]) * (right - left);
+                max = Math.Max(max, area);
+
+                if (height[left] < height[right])
+                    left++;
+                else
+                    right--;
+            }
+
+
+            return max;
+            
+        }
+
+
+        //3Sum
+        public static IList<IList<int>> ThreeSum(int[] nums)
+        {
+            //find all those triples which equal 0 i, j,k where i != j and k and j!=k
+            IList<IList<int>> ans;
+            ans = new List<IList<int>>();
+
+            ans.Add(nums);
+
+            foreach(int num in ans[0]) {
+                Console.WriteLine($"{num[0]}");    
+            }
+
+            return ans;
+        }
         static void Main(string[] args)
         {
-            Console.WriteLine(IntToRoman(1994));
+            int[] nums = { 2, 4, 5, 24, 2 };
+            Console.WriteLine(ThreeSum(nums));
         }
     }
 }
