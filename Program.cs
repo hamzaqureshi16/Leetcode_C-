@@ -482,26 +482,120 @@ namespace LeetCode_MedianOf2SortedArrays
             
         }
 
-
-        //3Sum
-        public static IList<IList<int>> ThreeSum(int[] nums)
-        {
-            //find all those triples which equal 0 i, j,k where i != j and k and j!=k
-            IList<IList<int>> ans;
-            ans = new List<IList<int>>();
-
-            ans.Add(nums);
-
-            foreach(int num in ans[0]) {
-                Console.WriteLine($"{num[0]}");    
+        //ValidParenthesis
+        public static Boolean ValidParenthesis(string s) {
+            Stack<char> stack = new Stack<char>();
+            foreach(char c in s)
+            {
+                if (c == '(' || c == '{' || c == '[')
+                {
+                    stack.Push(c);
+                }
+                else if (c == ')' && stack.Count != 0 && stack.Peek() == '(')
+                {
+                    stack.Pop();
+                }
+                else if (c == '}' && stack.Count != 0 && stack.Peek() == '{')
+                {
+                    stack.Pop();
+                }
+                else if (c == ']' && stack.Count != 0 && stack.Peek() == '[')
+                {
+                    stack.Pop();
+                }
+                else
+                {
+                    return false;
+                }
             }
 
-            return ans;
+            return stack.Count == 0;
+
+
         }
+
+
+      
+
+        //You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n,
+        //representing the number of elements in nums1 and nums2 respectively.
+        public static void Merge(int[] nums1, int m, int[] nums2, int n)
+        {
+            if (m!=0 && n!=0) {
+                foreach (int num in nums2)
+                {
+                    int counter = 0;
+                    while (counter < m)
+                    {
+                        if (nums1[counter] >= num)
+                        {
+                            for (int i = m - 1; i >= counter; i--)
+                            {
+                                nums1[i + 1] = nums1[i];
+                            }
+                            nums1[counter] = num;
+                            m++;
+                            break;
+                        }
+                        else if (counter == m - 1)
+                        {
+                            nums1[m] = num;
+                            m++;
+                            break;
+                        }
+                        counter++;
+                    }
+                }
+            }
+            else if(m == 0)
+            {
+                for(int i = 0; i < n; i++)
+                {
+                    nums1[i] = nums2[i];
+                }
+            }
+
+
+
+            foreach(int number in nums1)
+            {
+                Console.WriteLine(number);
+            }
+        }
+
+
+
+        public static LeetCode_problems.LinkedList reverseLinkedList(LeetCode_problems.LinkedList list) { 
+            Stack<int> stack = new Stack<int>();
+
+            while(list.Head != null)
+            {
+                stack.Push(list.Head.Value);
+                list.removeFromStart();
+            }
+
+            while(stack.Count != 0)
+            {
+                list.Add(stack.Pop());
+            }
+
+            list.Print();
+
+
+            return list; }
+
+        
         static void Main(string[] args)
         {
-            int[] nums = { 2, 4, 5, 24, 2 };
-            Console.WriteLine(ThreeSum(nums));
+            LeetCode_problems.LinkedList myList = new LeetCode_problems.LinkedList();
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+            myList.Add(5);
+
+
+            Console.WriteLine(reverseLinkedList(myList));
         }
     }
 }
